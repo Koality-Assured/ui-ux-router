@@ -94,3 +94,7 @@ nested_defaults:
     default_agent: benchmark-agent
   - path: ai-tooling/skills/iac
     default_agent: as-code-agent
+  - path: ai-tooling/skills/ui-ux
+    default_agent: design-system-architect
+  - path: supporting/ui-ux
+    default_agent: design-system-architect

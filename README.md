@@ -1,4 +1,24 @@
-# Koality-Assured AI Harness Core
+# ui-ux-router
+
+Public UI/UX spoke from AI Harness Core: design tokens, WCAG 2.2 audits, visual regression, and breakpoint checks. Generic machinery stays in core; this overlay lives only in this repo.
+
+## Repository layout
+
+| Directory | Role |
+| --- | --- |
+| `actionable/` | Human drop zone |
+| `ai-tooling/` | Skills, agents, A2A, memory |
+| `change-history/` | Provenance log (script-updated) |
+| `docs/` | Standards and session security |
+| `projects/` | Initiative specs |
+| `references/` | Advisory external frameworks |
+| `research/` | Topic deep-dives |
+| `results/` | Generated artifacts |
+| `routing/` | Area map and skill dispatch |
+| `scratch/` | Ephemeral workspace |
+| `scripts/` | Tagged Python automation |
+| `supporting/` | Tool recipes (qmd, Playwright, axe-core, DTCG) |
+
 
 Decoupled AI agent harness engine and generic template for multi-agent routing, 5-tier context hierarchies, multi-vendor prompt caching, precision cost layers, and sandboxed worktree execution.
 
