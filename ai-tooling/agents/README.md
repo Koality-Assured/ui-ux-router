@@ -25,6 +25,10 @@ Human index (not agent SoT):
 | [`benchmark-agent/`](./benchmark-agent/) | Empirical benchmarking: cost estimation, fleet dry runs, retrieval, tool efficiency | standard |
 | [`github-ops/`](./github-ops/) | GitHub PR workflow, branch discipline, issue management | standard |
 | [`git-fast-operator/`](./git-fast-operator/) | Simple git fetch/status/log/diff/sync | fast |
+| [`design-system-architect/`](./design-system-architect/) | DTCG tokens, CSS variables, component composition (spoke) | high |
+| [`a11y-compliance-operator/`](./a11y-compliance-operator/) | WCAG 2.2 / axe-core, keyboard traps, landmarks (spoke) | standard |
+| [`visual-qa-operator/`](./visual-qa-operator/) | Headless screenshot sweeps and golden pixel diff (spoke) | standard |
+| [`interaction-designer/`](./interaction-designer/) | Breakpoints, touch targets, reduced-motion (spoke) | standard |
 
 ### Legacy & component specialists (Consolidated into Operators)
 

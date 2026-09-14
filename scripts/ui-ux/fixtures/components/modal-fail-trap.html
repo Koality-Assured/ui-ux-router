@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Synthetic keyboard trap</title>
+  <style>
+    * { animation-duration: 0s !important; transition-duration: 0s !important; }
+    .trap { width: 280px; min-height: 96px; background: #ffffff; color: #1a1a1a; }
+  </style>
+</head>
+<body data-bg="#f4f4f4">
+  <main>
+    <div class="trap" role="dialog" data-role="dialog" data-keyboard-trap="true" data-bg="#ffffff" data-fg="#1a1a1a" data-w="280" data-h="96" onkeydown="if(event.key==='Tab') event.preventDefault()">
+      <p>Trapped overlay</p>
+      <button type="button" data-role="button" data-bg="#0b57d0" data-fg="#ffffff" data-w="96" data-h="48">OK</button>
+    </div>
+  </main>
+</body>
+</html>
