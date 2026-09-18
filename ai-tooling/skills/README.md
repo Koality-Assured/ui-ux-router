@@ -74,10 +74,6 @@ Human index (not agent SoT):
 | [`breaking-tech-news/`](./community/breaking-tech-news/) | research-operator | mutate |
 | [`community-registry-maintain/`](./community/community-registry-maintain/) | research-operator | mutate |
 | [`sync-downstream-repos/`](./meta/sync-downstream-repos/) | harness-operator | mutate |
-| [`design-token-manage/`](./ui-ux/design-token-manage/) | design-system-architect | mutate |
-| [`responsive-breakpoint-verify/`](./ui-ux/responsive-breakpoint-verify/) | interaction-designer | read-only |
-| [`visual-regression-audit/`](./ui-ux/visual-regression-audit/) | visual-qa-operator | mutate |
-| [`wcag-accessibility-audit/`](./ui-ux/wcag-accessibility-audit/) | a11y-compliance-operator | mutate |
 | [`tabler-dashboard/`](./reporting/tabler-dashboard/) | document-operator | mutate |
 | [`threat-model/`](./reporting/threat-model/) | security-tooling-operator | mutate |
 | [`router-structure/`](./meta/router-structure/) | document-operator | read-only |
