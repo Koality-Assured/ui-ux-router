@@ -18,10 +18,10 @@ Human index (not agent SoT):
 
 | Specialist | Role | Tier |
 | --- | --- | --- |
-| [`design-system-architect/`](./design-system-architect/) | DTCG design tokens, CSS variables, typography and color contracts, component composition rules | high |
-| [`a11y-compliance-operator/`](./a11y-compliance-operator/) | Automated WCAG 2.2 AA accessibility audits, axe-core tags, keyboard traps, ARIA landmarks | standard |
-| [`interaction-designer/`](./interaction-designer/) | Micro-interactions, keyboard shortcuts, touch targets, prefers-reduced-motion, responsive reflow | standard |
-| [`visual-qa-operator/`](./visual-qa-operator/) | Headless multi-breakpoint screenshot sweeps, pixel diffs against golden baselines | standard |
+| [`design-system-architect/`](./design-system-architect/) | DTCG design tokens, CSS variables, modular typography scales, multi-theme token switching, component variant matrices | high |
+| [`a11y-compliance-operator/`](./a11y-compliance-operator/) | Automated WCAG 2.2 AA accessibility audits, screen reader semantics (ARIA/landmarks/accname), keyboard focus navigation & traps | standard |
+| [`interaction-designer/`](./interaction-designer/) | Micro-interaction choreography, navigation flow specs, information architecture maps, touch targets, responsive reflow | standard |
+| [`visual-qa-operator/`](./visual-qa-operator/) | Headless multi-breakpoint screenshot sweeps, pixel diffs against golden baselines, component variant visual verification | standard |
 
 ### Coordinator & true specialists
 

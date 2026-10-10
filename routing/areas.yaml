@@ -67,7 +67,7 @@ nested_defaults:
   - path: references/socials
     default_agent: research-operator
   - path: supporting/aws
-    default_agent: cloud-operator
+    default_agent: harness-operator
   - path: supporting/github
     default_agent: github-ops
   - path: supporting/qmd
@@ -91,4 +91,6 @@ nested_defaults:
   - path: ai-tooling/skills/ui-ux
     default_agent: design-system-architect
   - path: supporting/ui-ux
+    default_agent: design-system-architect
+  - path: scripts/ui-ux
     default_agent: design-system-architect

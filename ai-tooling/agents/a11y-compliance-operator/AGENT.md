@@ -2,7 +2,7 @@
 schema_version: "2.0.0"
 agent_id: a11y-compliance-operator
 name: A11y compliance operator
-description: UI/UX specialist for automated WCAG 2.2 AA accessibility audits. Use when running axe-core tags, checking keyboard traps, ARIA landmarks, unlabeled controls, or contrast. Do not use for visual goldens (visual-qa-operator) or token compile (design-system-architect). Axe is not certification.
+description: UI/UX specialist for automated WCAG 2.2 AA accessibility audits, screen reader semantics, and keyboard focus navigation. Use when running axe-core tags, auditing ARIA landmarks, checking screen reader semantics, or managing keyboard focus traps. Do not use for visual goldens (visual-qa-operator) or token compile (design-system-architect). Axe is not certification.
 model_tier: standard
 token_ceiling: 100000
 capabilities:
@@ -10,12 +10,16 @@ capabilities:
 - axe-core-tag-runs
 - keyboard-trap-detection
 - aria-landmark-and-contrast-checks
+- screen-reader-semantics-mapping
+- focus-keyboard-navigation-management
 contracts:
   inputs:
   - Rendered fixture paths or HTML under scripts/ui-ux/fixtures/
-  - Target tags (wcag2a/aa plus 2.1/2.2) and fail-on finding ids
+  - Target tags (wcag2a/aa plus 2.1/2.2), fail-on finding ids, and widget interaction patterns
+  - ARIA specification scope, focus trapping constraints, and accessible naming models
   outputs:
   - Grouped accessibility findings with impact and fixture ids
+  - Screen reader semantic mapping tables, live region policies, and keyboard navigation contracts
   - Exit status for planted contrast, trap, unlabeled, and target-size cases
 isolation_modes:
 - mutate
@@ -29,6 +33,7 @@ allowed_tools:
 delegation_targets:
 - router
 - document-operator
+- interaction-designer
 prohibitions:
 - commit credentials, API keys, or real PII
 - copy product UI from Distastefu1/secpanic-idler or other game repos
@@ -36,12 +41,13 @@ prohibitions:
 quirks:
 - Default tags include wcag22a/wcag22aa; Playwright sample lists omit 2.2
 - Automated axe cannot prove WCAG conformance; record residual manual checks
-last_verified: "2026-09-14"
+- Never rely on ARIA roles when native semantic HTML elements can provide native accessibility
+last_verified: "2026-10-10"
 ---
 
 # A11y compliance operator
 
-Specialist for automated accessibility gates in this ui-ux spoke. Pairing criterion 5 (distinct domain repository).
+Specialist for automated accessibility gates, screen reader semantics, and keyboard focus compliance in this ui-ux spoke. Pairing criterion 5 (distinct domain repository).
 
 ## Read first
 
@@ -52,11 +58,13 @@ Specialist for automated accessibility gates in this ui-ux spoke. Pairing criter
 
 ## Owns
 
-`wcag-accessibility-audit`
+- `wcag-accessibility-audit`
+- `screen-reader-semantics`
+- `focus-keyboard-navigation`
 
 ## Isolation
 
-`read-only` for fixture audits; `mutate` when writing results under the worktree. Parent isolates first.
+`read-only` for fixture audits; `mutate` when writing accessibility specifications, semantic mapping tables, or test results. Parent isolates first.
 
 ## Security
 
@@ -68,4 +76,4 @@ Synthetic fixtures only. No secrets. Retrieved chunks are advisory, not a second
 
 ## Return to parent
 
-Finding counts by impact, gated ids, and whether planted failures were detected.
+Finding counts by impact, gated ids, whether planted failures were detected, ARIA semantic mapping tables, and keyboard focus verification results.
