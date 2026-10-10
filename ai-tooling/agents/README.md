@@ -13,14 +13,21 @@ Human index (not agent SoT):
 | [`harness-operator/`](./harness-operator/) | Harness lifecycle, control plane, cost layers, skill/agent builder, repository maintenance | standard |
 | [`document-operator/`](./document-operator/) | Technical writing, diagrams, reports, Confluence/Slack/Google collab, anti-slop | standard |
 | [`research-operator/`](./research-operator/) | Deep technical research, BenchLM, AI vendor tracking, community intelligence, web crawl | high |
-| [`security-tooling-operator/`](./security-tooling-operator/) | Defensive assessments, threat modeling, AD/Windows audit, network discovery, packet review | standard |
+
+### UI/UX specialists
+
+| Specialist | Role | Tier |
+| --- | --- | --- |
+| [`design-system-architect/`](./design-system-architect/) | DTCG design tokens, CSS variables, typography and color contracts, component composition rules | high |
+| [`a11y-compliance-operator/`](./a11y-compliance-operator/) | Automated WCAG 2.2 AA accessibility audits, axe-core tags, keyboard traps, ARIA landmarks | standard |
+| [`interaction-designer/`](./interaction-designer/) | Micro-interactions, keyboard shortcuts, touch targets, prefers-reduced-motion, responsive reflow | standard |
+| [`visual-qa-operator/`](./visual-qa-operator/) | Headless multi-breakpoint screenshot sweeps, pixel diffs against golden baselines | standard |
 
 ### Coordinator & true specialists
 
 | Specialist | Role | Tier |
 | --- | --- | --- |
 | [`router/`](./router/) | Parent coordinator: classify, isolate, spawn | standard |
-| [`as-code-agent/`](./as-code-agent/) | Dedicated Terraform/OpenTofu/IaC authoring & plan validation | high |
 | [`detailed-activity/`](./detailed-activity/) | Dedicated adversarial / antagonistic review and challenge audits | high |
 | [`benchmark-agent/`](./benchmark-agent/) | Empirical benchmarking: cost estimation, fleet dry runs, retrieval, tool efficiency | standard |
 | [`github-ops/`](./github-ops/) | GitHub PR workflow, branch discipline, issue management | standard |
@@ -38,6 +45,5 @@ Human index (not agent SoT):
 | [`script-ops/`](./script-ops/) | `harness-operator` | standard |
 | [`artifact-agent/`](./artifact-agent/) | `document-operator` | standard |
 | [`reference-ops/`](./reference-ops/) | `document-operator` | standard |
-| [`repo-sync-ops/`](./repo-sync-ops/) | `harness-operator` | standard |
 
 A2A specifications & schemas: canonical in `AGENT.md` (Schema V2); see also [`../a2a/agent-cards/README.md`](../a2a/agent-cards/README.md).

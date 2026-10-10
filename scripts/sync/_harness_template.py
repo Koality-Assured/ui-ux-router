@@ -104,7 +104,6 @@ HARNESS_TEMPLATE_KEEP_SKILLS: frozenset[str] = frozenset(
         "antagonistic-review",
         "anti-slop",
         "architecture-diagram",
-        "as-code-builder",
         "ast-grep",
         "code-review-report",
         "corpus-draft",
@@ -137,7 +136,6 @@ HARNESS_TEMPLATE_KEEP_SKILLS: frozenset[str] = frozenset(
         "script-builder",
         "skill-builder",
         "skill-dry-run",
-        "sync-downstream-repos",
         "task-eval-benchmark",
         "tool-efficiency-benchmark",
         "router-structure",
@@ -157,10 +155,12 @@ WIKI_TEMPLATE_DROP_SKILL_PREFIXES = HARNESS_TEMPLATE_DROP_SKILL_PREFIXES
 
 HARNESS_TEMPLATE_DROP_SKILLS: frozenset[str] = frozenset(
     {
+        "as-code-builder",
         "framework-mapper",
         "threat-model",
         "noir-scan",
         "foundation-site",
+        "sync-downstream-repos",
         "tabler-dashboard",
     }
 )
@@ -169,6 +169,7 @@ WIKI_TEMPLATE_DROP_SKILLS = HARNESS_TEMPLATE_DROP_SKILLS
 # Domain-tied specialists whose skills were dropped (aws/azure/gcp, STRIDE, etc.).
 HARNESS_TEMPLATE_DROP_AGENTS: frozenset[str] = frozenset(
     {
+        "as-code-agent",
         "cloud-operator",
         "cloud-admin-agent",
         "assessment-agent",
@@ -178,6 +179,8 @@ HARNESS_TEMPLATE_DROP_AGENTS: frozenset[str] = frozenset(
         "docs-collab-agent",
         "public-llm-admin",
         "community-analyst",
+        "repo-sync-ops",
+        "security-tooling-operator",
     }
 )
 WIKI_TEMPLATE_DROP_AGENTS = HARNESS_TEMPLATE_DROP_AGENTS
@@ -187,7 +190,6 @@ HARNESS_TEMPLATE_KEEP_AGENTS: frozenset[str] = frozenset(
     {
         "ai-tooling-ops",
         "artifact-agent",
-        "as-code-agent",
         "benchmark-agent",
         "detailed-activity",
         "document-operator",
@@ -198,12 +200,10 @@ HARNESS_TEMPLATE_KEEP_AGENTS: frozenset[str] = frozenset(
         "memory-operator",
         "qmd-ops",
         "reference-ops",
-        "repo-sync-ops",
         "research-operator",
         "router",
         "router-maintenance",
         "script-ops",
-        "security-tooling-operator",
     }
 )
 WIKI_TEMPLATE_KEEP_AGENTS = HARNESS_TEMPLATE_KEEP_AGENTS

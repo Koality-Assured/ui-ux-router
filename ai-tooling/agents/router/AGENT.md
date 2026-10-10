@@ -44,19 +44,25 @@ allowed_tools:
 - list_dir
 - send_message
 delegation_targets:
+- a11y-compliance-operator
 - ai-tooling-ops
 - artifact-agent
-- as-code-agent
+- benchmark-agent
+- design-system-architect
 - detailed-activity
+- document-operator
 - documentation-ops
 - git-fast-operator
 - github-ops
+- harness-operator
+- interaction-designer
 - memory-operator
 - qmd-ops
 - reference-ops
-- repo-sync-ops
+- research-operator
 - router-maintenance
 - script-ops
+- visual-qa-operator
 prohibitions:
 - execute catalogued skill bodies in-parent except isolate-work CLI
 - load specialist SKILL.md in-parent except isolate-work CLI
