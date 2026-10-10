@@ -142,13 +142,60 @@ def check_query_matches(viewport: int, query: dict[str, Any]) -> bool:
     return True
 
 
+def strip_css_comments(css: str) -> str:
+    """Strip /* ... */ comments from CSS text."""
+    return re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
+
+
+def remove_desktop_media_queries(css: str) -> str:
+    """Remove desktop media query blocks (@media with min-width >= 1024px) from CSS text."""
+    pos = 0
+    result: list[str] = []
+    media_re = re.compile(r"@media\s+([^{]+)\{", re.IGNORECASE)
+
+    while pos < len(css):
+        m = media_re.search(css, pos)
+        if not m:
+            result.append(css[pos:])
+            break
+
+        # Append text up to @media
+        result.append(css[pos:m.start()])
+
+        raw_query = m.group(1).strip()
+        min_w: float | None = None
+        for wm in MIN_WIDTH_RE.finditer(raw_query):
+            min_w = _to_pixels(wm.group(1), wm.group(2))
+
+        # Find matching closing brace for this @media block
+        brace_count = 1
+        i = m.end()  # right after opening '{'
+        while i < len(css) and brace_count > 0:
+            if css[i] == "{":
+                brace_count += 1
+            elif css[i] == "}":
+                brace_count -= 1
+            i += 1
+
+        # If min-width is >= 1024px, skip the desktop block from hazard evaluation
+        if min_w is not None and min_w >= 1024:
+            pass
+        else:
+            result.append(css[m.start():i])
+
+        pos = i
+
+    return "".join(result)
+
+
 def analyze_css_breakpoints(
     css: str,
     viewports: tuple[int, ...] = STANDARD_VIEWPORTS,
 ) -> dict[str, Any]:
     """Analyze CSS rules against standard viewport matrix for coverage and hazards."""
-    media_queries = extract_media_queries(css)
-    container_queries = extract_container_queries(css)
+    clean_css = strip_css_comments(css)
+    media_queries = extract_media_queries(clean_css)
+    container_queries = extract_container_queries(clean_css)
 
     coverage: dict[str, Any] = {}
     for vp in viewports:
@@ -163,8 +210,9 @@ def analyze_css_breakpoints(
             "has_breakpoint_match": len(matching) > 0,
         }
 
-    # Detect fixed-width overflow hazards (fixed width in px > 320)
-    fixed_widths = [int(m.group(1)) for m in FIXED_WIDTH_RE.finditer(css)]
+    # Detect fixed-width overflow hazards (fixed width in px > 320), ignoring desktop media queries (min-width >= 1024px)
+    mobile_css = remove_desktop_media_queries(clean_css)
+    fixed_widths = [int(m.group(1)) for m in FIXED_WIDTH_RE.finditer(mobile_css)]
     hazards = [
         {"fixed_width": w, "hazard": f"Fixed width {w}px exceeds mobile 320px viewport"}
         for w in fixed_widths
@@ -172,8 +220,8 @@ def analyze_css_breakpoints(
     ]
 
     # Detect 4K containment: presence of max-width rules to bound line length
-    has_max_width = bool(MAX_WIDTH_PROP_RE.search(css))
-    has_fluid_clamp = bool(CLAMP_RE.search(css))
+    has_max_width = bool(MAX_WIDTH_PROP_RE.search(clean_css))
+    has_fluid_clamp = bool(CLAMP_RE.search(clean_css))
 
     return {
         "media_query_count": len(media_queries),

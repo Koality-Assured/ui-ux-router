@@ -247,31 +247,7 @@ FAST_PATH_RULES: list[dict[str, Any]] = [
             r"\bc4\s+model\s+diagram\b",
         ],
     },
-    # Security & Assessment
-    {
-        "skill": "noir-scan",
-        "owner_agent": "artifact-agent",
-        "patterns": [
-            r"\b(?:run\s+)?noir\s+scan\b",
-            r"\bnoir-scan\b",
-            r"\bowasp\s+noir\b",
-            r"\bshadow\s+api\s+scan\b",
-            r"\brun_noir_scan\.py\b",
-            r"\bsecurity\s+scans?\b",
-            r"\bnoir\b",
-        ],
-    },
-    {
-        "skill": "threat-model",
-        "owner_agent": "assessment-agent",
-        "patterns": [
-            r"\bstride\s+threat\s+model\b",
-            r"\bthreat\s+model(?:ing)?\b",
-            r"\bthreat-model\b",
-            r"\bbuild_threat_model\.py\b",
-            r"\bstride\b",
-        ],
-    },
+
     {
         "skill": "code-review-report",
         "owner_agent": "artifact-agent",
@@ -412,24 +388,7 @@ FAST_PATH_RULES: list[dict[str, Any]] = [
             r"\bproposal\s+report\b",
         ],
     },
-    {
-        "skill": "tabler-dashboard",
-        "owner_agent": "artifact-agent",
-        "patterns": [
-            r"\btabler-dashboard\b",
-            r"\btabler\s+dashboard\b",
-            r"\bhtml\s+dashboard\b",
-        ],
-    },
-    {
-        "skill": "foundation-site",
-        "owner_agent": "artifact-agent",
-        "patterns": [
-            r"\bfoundation-site\b",
-            r"\bfoundation\s+sites?\s+html\b",
-            r"\bbuild_foundation_site\.py\b",
-        ],
-    },
+
     # Memory
     {
         "skill": "memory-create",
@@ -455,51 +414,94 @@ FAST_PATH_RULES: list[dict[str, Any]] = [
             r"\barchive\s+memory\s+checkpoint\b",
         ],
     },
-    # Cloud operators
+    # UI/UX Engineering
     {
-        "skill": "aws-logs",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\baws\s+logs\b", r"\baws-logs\b"],
+        "skill": "design-token-manage",
+        "owner_agent": "design-system-architect",
+        "patterns": [
+            r"\bcompile_design_tokens(?:\.py)?\b",
+            r"\bdesign-token-manage\b",
+            r"\bdesign-tokens?\b",
+            r"\bdtcg\s+tokens?\b",
+            r"\bcompile\s+design\s+tokens?\b",
+            r"\bstyle\s+dictionary\b",
+        ],
     },
     {
-        "skill": "aws-read",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\baws\s+read\b", r"\baws-read\b", r"\binspect\s+aws\b"],
+        "skill": "component-variant-matrix",
+        "owner_agent": "design-system-architect",
+        "patterns": [
+            r"\bcomponent-variant-matrix\b",
+            r"\bcomponent\s+variant\s+matrix\b",
+            r"\bvariant\s+matrix\b",
+            r"\bcomponent\s+permutations?\b",
+        ],
     },
     {
-        "skill": "aws-write",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\baws\s+write\b", r"\baws-write\b", r"\bauthorize\s+aws\s+write\b"],
+        "skill": "typography-scale-calc",
+        "owner_agent": "design-system-architect",
+        "patterns": [
+            r"\btypography-scale-calc\b",
+            r"\btypography\s+scale\b",
+            r"\btypographic\s+scale\b",
+            r"\bfluid\s+clamp\b",
+            r"\bfluid\s+typography\b",
+        ],
     },
     {
-        "skill": "azure-logs",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\bazure\s+logs\b", r"\bazure-logs\b"],
+        "skill": "micro-interaction-choreography",
+        "owner_agent": "interaction-designer",
+        "patterns": [
+            r"\bmicro-interaction-choreography\b",
+            r"\bmicro-interactions?\b",
+            r"\bmicro\s+interactions?\b",
+            r"\btransition\s+curves?\b",
+            r"\bprefers-reduced-motion\b",
+            r"\bchoreograph(?:y|ing)?\s+(?:micro-)?interactions?\b",
+        ],
     },
     {
-        "skill": "azure-read",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\bazure\s+read\b", r"\bazure-read\b", r"\binspect\s+azure\b"],
+        "skill": "navigation-flow-spec",
+        "owner_agent": "interaction-designer",
+        "patterns": [
+            r"\bnavigation-flow-spec\b",
+            r"\bnavigation\s+flows?\b",
+            r"\bview\s+transitions?\b",
+            r"\bmodal\s+(?:and\s+drawer\s+)?stack\b",
+            r"\bflow\s+spec\b",
+        ],
     },
     {
-        "skill": "azure-write",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\bazure\s+write\b", r"\bazure-write\b", r"\bauthorize\s+azure\s+write\b"],
+        "skill": "wcag-accessibility-audit",
+        "owner_agent": "a11y-compliance-operator",
+        "patterns": [
+            r"\bwcag-accessibility-audit\b",
+            r"\bwcag\s+(?:2\.2\s+)?(?:aa\s+)?audit\b",
+            r"\baccessibility\s+audit\b",
+            r"\baxe-core\b",
+            r"\baudit_accessibility\.py\b",
+        ],
     },
     {
-        "skill": "gcp-logs",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\bgcp\s+logs\b", r"\bgcp-logs\b"],
+        "skill": "responsive-breakpoint-verify",
+        "owner_agent": "interaction-designer",
+        "patterns": [
+            r"\bresponsive-breakpoint-verify\b",
+            r"\bresponsive\s+breakpoint\b",
+            r"\bviewport\s+matrix\b",
+            r"\bviewport_matrix_tester\.py\b",
+            r"\bmulti-viewport\s+layout\b",
+        ],
     },
     {
-        "skill": "gcp-read",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\bgcp\s+read\b", r"\bgcp-read\b", r"\binspect\s+gcp\b"],
-    },
-    {
-        "skill": "gcp-write",
-        "owner_agent": "cloud-operator",
-        "patterns": [r"\bgcp\s+write\b", r"\bgcp-write\b", r"\bauthorize\s+gcp\s+write\b"],
+        "skill": "visual-regression-audit",
+        "owner_agent": "visual-qa-operator",
+        "patterns": [
+            r"\bvisual-regression-audit\b",
+            r"\bvisual\s+regression\b",
+            r"\bscreenshot\s+gates?\b",
+            r"\bpixel\s+diff(?:ing)?\b",
+        ],
     },
 ]
 

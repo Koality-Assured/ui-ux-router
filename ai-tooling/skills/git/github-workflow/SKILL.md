@@ -32,8 +32,8 @@ High for shared remotes: feature branch → push branch → PR → merge. **Neve
 
 ## Source of truth
 
-- [`supporting/github/README.md`](../../../../supporting/github/README.md)
-- [`docs/standards/github-iac-security.md`](../../../../docs/standards/github-iac-security.md)
+- [`supporting/github/gh-workflow-notes.md`](../../../../supporting/github/gh-workflow-notes.md)
+- [`docs/agent-session-security.md`](../../../../docs/agent-session-security.md)
 - User commit/PR rules (only commit when asked; `gh` for GitHub)
 
 ## Isolation

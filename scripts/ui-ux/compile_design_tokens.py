@@ -65,22 +65,65 @@ def _walk(node: Any, path: tuple[str, ...], errors: list[str], tokens: dict[str,
 
 
 def resolve(tokens: dict[str, dict[str, Any]]) -> list[str]:
-    """Resolve token aliases like {color.action} to their concrete values."""
+    """Resolve token aliases like {color.action} to their concrete values, supporting multi-hop and cycle detection."""
     errors: list[str] = []
-    for name, rec in tokens.items():
+    state: dict[str, str] = {}  # "resolving", "resolved", "error"
+
+    def _resolve_token(name: str, chain: list[str]) -> Any:
+        rec = tokens[name]
         value = rec["value"]
-        if isinstance(value, str):
-            match = ALIAS_RE.match(value)
-            if match:
-                target = match.group(1)
-                if target not in tokens:
-                    errors.append(f"{name}: alias {{{target}}} is missing")
-                rec["resolved"] = tokens.get(target, {}).get("value", value)
-                rec["alias_of"] = target
-            else:
-                rec["resolved"] = value
-        else:
+
+        if not isinstance(value, str):
             rec["resolved"] = value
+            state[name] = "resolved"
+            return value
+
+        match = ALIAS_RE.match(value)
+        if not match:
+            rec["resolved"] = value
+            state[name] = "resolved"
+            return value
+
+        target = match.group(1)
+        rec["alias_of"] = target
+
+        if target not in tokens:
+            errors.append(f"{name}: alias {{{target}}} is missing")
+            rec["resolved"] = value
+            state[name] = "error"
+            return value
+
+        if target in chain:
+            cycle = " -> ".join(chain + [target])
+            errors.append(f"{name}: circular alias reference detected ({cycle})")
+            rec["resolved"] = value
+            state[name] = "error"
+            return value
+
+        if state.get(target) == "resolved":
+            resolved_val = tokens[target]["resolved"]
+            rec["resolved"] = resolved_val
+            state[name] = "resolved"
+            return resolved_val
+
+        if state.get(target) == "error":
+            rec["resolved"] = value
+            state[name] = "error"
+            return value
+
+        state[name] = "resolving"
+        resolved_val = _resolve_token(target, chain + [target])
+        rec["resolved"] = resolved_val
+        if state.get(target) == "error":
+            state[name] = "error"
+        else:
+            state[name] = "resolved"
+        return resolved_val
+
+    for name in list(tokens.keys()):
+        if name not in state:
+            _resolve_token(name, [name])
+
     return errors
 
 

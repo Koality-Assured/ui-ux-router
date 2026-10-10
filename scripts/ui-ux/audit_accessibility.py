@@ -405,7 +405,14 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     # Direct color pair contrast check
-    if args.fg and args.bg:
+    if args.fg or args.bg:
+        if args.fg and not args.bg:
+            print("error: --bg must be provided when --fg is specified", file=sys.stderr)
+            return 2
+        if args.bg and not args.fg:
+            print("error: --fg must be provided when --bg is specified", file=sys.stderr)
+            return 2
+
         try:
             fg_rgb = parse_hex(args.fg)
             bg_rgb = parse_hex(args.bg)

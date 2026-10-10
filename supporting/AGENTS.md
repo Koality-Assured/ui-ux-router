@@ -15,4 +15,4 @@ Ingest simply; do not duplicate skills or paste root Critical — link [`../AGEN
 - Nested AGENTS only when a tool subtree becomes complex.
 - Workstation setup: [`workstation-onboarding.md`](./workstation-onboarding.md). Retrieval writing: [`qmd/retrieval-conventions.md`](./qmd/retrieval-conventions.md).
 - Agent recipes (not README): `qmd/query-pattern.md`, `ast-grep/precision-retrieval.md`, `headroom/proxy-mcp.md`, tool-specific tagged pages.
-- Default specialists: `qmd-ops`, `github-ops`, `router-maintenance` (headroom/ast-grep), `design-system-architect` (ui-ux) — spawn matching skill owners when that work is material. Parent runs isolate CLI.
+- Default specialists: `qmd-ops`, `github-ops`, `harness-operator` (headroom/ast-grep), `design-system-architect` (ui-ux) — spawn matching skill owners when that work is material. Parent runs isolate CLI.

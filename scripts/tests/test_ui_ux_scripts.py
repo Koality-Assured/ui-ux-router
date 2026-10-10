@@ -16,7 +16,7 @@ import json
 import sys
 import tempfile
 import unittest
-from contextlib import redirect_stdout
+from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
 _SCRIPTS = Path(__file__).resolve().parents[1]
@@ -140,6 +140,49 @@ class TestCompileDesignTokens(unittest.TestCase):
         }
         errors = resolve(tokens)
         self.assertTrue(any("missing" in err for err in errors))
+
+    def test_resolve_multi_hop_aliases(self) -> None:
+        raw = {
+            "color": {
+                "palette": {
+                    "blue500": {
+                        "$type": "color",
+                        "$value": "#3b82f6",
+                    }
+                },
+                "brand": {
+                    "primary": {
+                        "$type": "color",
+                        "$value": "{color.brand.main}",
+                    },
+                    "main": {
+                        "$type": "color",
+                        "$value": "{color.palette.blue500}",
+                    },
+                },
+            }
+        }
+        payload = compile_tokens(raw)
+        self.assertTrue(payload["ok"], payload["errors"])
+        self.assertEqual(payload["tokens"]["color.brand.primary"]["resolved"], "#3b82f6")
+        self.assertEqual(payload["tokens"]["color.brand.main"]["resolved"], "#3b82f6")
+        self.assertEqual(payload["tokens"]["color.palette.blue500"]["resolved"], "#3b82f6")
+
+    def test_resolve_circular_alias_reference(self) -> None:
+        tokens = {
+            "color.a": {
+                "path": "color.a",
+                "type": "color",
+                "value": "{color.b}",
+            },
+            "color.b": {
+                "path": "color.b",
+                "type": "color",
+                "value": "{color.a}",
+            },
+        }
+        errors = resolve(tokens)
+        self.assertTrue(any("circular" in err for err in errors))
 
     def test_reject_mixed_legacy_value(self) -> None:
         mixed = {
@@ -373,6 +416,19 @@ class TestAuditAccessibility(unittest.TestCase):
         code_fail = a11y_main(["--file", str(fail_path), "--level", "AA"])
         self.assertEqual(code_fail, 1)
 
+    def test_cli_fg_without_bg_raises_error(self) -> None:
+        buf_err = io.StringIO()
+        with redirect_stderr(buf_err):
+            code = a11y_main(["--fg", "#ffffff"])
+        self.assertEqual(code, 2)
+        self.assertIn("--bg must be provided", buf_err.getvalue())
+
+        buf_err2 = io.StringIO()
+        with redirect_stderr(buf_err2):
+            code2 = a11y_main(["--bg", "#000000"])
+        self.assertEqual(code2, 2)
+        self.assertIn("--fg must be provided", buf_err2.getvalue())
+
 
 class TestViewportMatrixTester(unittest.TestCase):
     """Unit and CLI tests for viewport_matrix_tester.py."""
@@ -442,6 +498,27 @@ class TestViewportMatrixTester(unittest.TestCase):
         self.assertEqual(cov["320"]["matching_queries_count"], 0)
         self.assertEqual(cov["768"]["matching_queries_count"], 1)
         self.assertEqual(cov["1024"]["matching_queries_count"], 2)
+
+    def test_analyze_css_breakpoints_strips_comments_and_ignores_desktop_media_queries(self) -> None:
+        css = """
+        /* Commented out rule must not trigger hazard: width: 500px; */
+        .mobile-safe { width: 100%; }
+
+        /* Desktop-only media query must be ignored for mobile hazards */
+        @media (min-width: 1024px) {
+            .desktop-sidebar {
+                width: 480px;
+            }
+        }
+        @media screen and (min-width: 1200px) {
+            .large-container {
+                width: 1100px;
+            }
+        }
+        """
+        analysis = analyze_css_breakpoints(css)
+        self.assertEqual(len(analysis["fixed_width_hazards"]), 0)
+        self.assertEqual(analysis["media_query_count"], 2)
 
     def test_component_layout_pass_and_overflow(self) -> None:
         # button-ok.html passes across all viewports
