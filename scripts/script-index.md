@@ -2,7 +2,7 @@
 doc_kind: routing_map
 canonical_id: script-index
 topics: [scripts, routing]
-generated_at_utc: 2026-09-22T16:03:04Z
+generated_at_utc: 2026-10-10T08:22:55Z
 generator: scripts/routing/generate_script_index.py
 ---
 
@@ -58,7 +58,6 @@ Generated from Python docstring `tags:` / `routing_hints:`. Do not hand-edit —
 | [`sync/propose_core_update.py`](./sync/propose_core_update.py) | `sync`, `harness`, `propose` | propose-core-update, harness-core, pull-request, issue | Propose generic core improvements back to Koality-Assured/ai-harness-core. |
 | [`sync/pull_harness_core.py`](./sync/pull_harness_core.py) | `sync`, `harness`, `pull` | pull-harness-core, core-update, spoke, allowlist | Pull allowlisted ai-harness-core updates into a domain spoke. |
 | [`sync/scaffold_harness.py`](./sync/scaffold_harness.py) | `sync`, `harness`, `scaffold` | scaffold-harness, domain-router, harness-core, spoke | Scaffold a domain harness spoke from generic ai-harness-core. |
-| [`sync/sync_and_push_downstreams.py`](./sync/sync_and_push_downstreams.py) | `sync`, `git`, `export`, `downstream` | sync-and-push, update-downstreams, multi-repo-publish, downstream-repo-update | Automated synchronization, sanitation, commit, and push engine for public downstream repositories. |
 | [`sync/sync_public_repos.py`](./sync/sync_public_repos.py) | `sync`, `security`, `export` | sync, redaction, multi-repo, export, sanitize, wiki-template | Multi-repo synchronization and sanitization/redaction engine for public exports. |
 | [`tests/test_benchmarks.py`](./tests/test_benchmarks.py) | `tests`, `benchmarks`, `cost-layers`, `agents`, `retrieval`, `fleet` | tests, test-benchmarks, cost-estimator, fleet-benchmark, mrr | Unit tests for empirical benchmarking and cost estimation tooling. |
 | [`tests/test_harness_auth.py`](./tests/test_harness_auth.py) | `tests`, `harness`, `cli`, `auth`, `keyring`, `oauth`, `security` | tests, auth, keyring, vault, oauth, pkce, sanitization | Unit tests for Harness CLI Universal Auth Subsystem and Keyring Manager. |
@@ -73,15 +72,17 @@ Generated from Python docstring `tags:` / `routing_hints:`. Do not hand-edit —
 | [`tests/test_skill_graph.py`](./tests/test_skill_graph.py) | `tests`, `routing`, `skills`, `dag` | tests, dag, topological-sort, dependencies, prerequisites | Unit tests for skill dependency DAG resolution, topological ordering, and Schema V2 conventions. |
 | [`tests/test_subagent_context_config.py`](./tests/test_subagent_context_config.py) | `tests`, `subagents`, `context`, `config` | tests, subagents, context-isolation, host-config | Unit tests for cross-host subagent context isolation and project-level settings. |
 | [`tests/test_ui_ux.py`](./tests/test_ui_ux.py) | `tests`, `ui-ux` | visual-regression, accessibility, design-tokens | Tests for ui-ux synthetic visual, a11y, and token gates. |
+| [`tests/test_ui_ux_scripts.py`](./tests/test_ui_ux_scripts.py) | `tests`, `ui-ux` | design-tokens, accessibility, breakpoints, apca | Comprehensive unit tests for UI/UX automation scripts and CLI interfaces. |
 | [`tests/test_validate_agent.py`](./tests/test_validate_agent.py) | `tests`, `ai-tooling`, `agents`, `schema-v2` | tests, validate-agent, agents | Unit tests for Schema V2 agent validation. |
 | [`tests/test_validate_context_budget.py`](./tests/test_validate_context_budget.py) | `tests`, `docs`, `validation`, `cost-layers` | tests, validate_context_budget, context-budget, tokens | Unit tests for validate_context_budget.py. |
 | [`tests/test_validate_prompt_caching.py`](./tests/test_validate_prompt_caching.py) | `tests`, `cost-layers`, `prompt-caching` | tests, prompt-caching, invariance | Unit tests for validate_prompt_caching.py prompt KV-cache invariance linter. |
 | [`tests/test_validate_router_structure.py`](./tests/test_validate_router_structure.py) | `tests`, `docs`, `validation`, `results` | tests, validate_router_structure, results-layout | Unit tests for router structure validator results-layout check. |
 | [`tests/test_validate_skill.py`](./tests/test_validate_skill.py) | `tests`, `ai-tooling`, `skills`, `schema-v2` | tests, validate-skill, skills | Unit tests for Schema V2 skill validation. |
 | [`tests/test_validate_structure_fast.py`](./tests/test_validate_structure_fast.py) | `tests`, `docs`, `validation` | tests, validate_structure_fast, markdown | Unit tests for fast structural validator. |
-| [`ui-ux/audit_accessibility.py`](./ui-ux/audit_accessibility.py) | `ui-ux`, `accessibility`, `wcag`, `axe-core` | contrast, keyboard-trap, axe, focus-order | WCAG 2.2 AA accessibility audit for synthetic UI fixtures. |
-| [`ui-ux/compile_design_tokens.py`](./ui-ux/compile_design_tokens.py) | `ui-ux`, `design-tokens`, `dtcg` | tokens, css-variables, style-dictionary | Lint and compile W3C DTCG design tokens to CSS/SCSS/Tailwind snippets. |
+| [`ui-ux/audit_accessibility.py`](./ui-ux/audit_accessibility.py) | `ui-ux`, `accessibility`, `wcag`, `apca`, `axe-core` | contrast, keyboard-trap, axe, focus-order, touch-target, color-blindness | WCAG 2.2 AA/AAA accessibility audit and APCA contrast testing with CVD simulation. |
+| [`ui-ux/compile_design_tokens.py`](./ui-ux/compile_design_tokens.py) | `ui-ux`, `design-tokens`, `dtcg` | tokens, css-variables, style-dictionary, typescript | Lint and compile W3C DTCG design tokens to CSS variables, SCSS variables, and TypeScript token exports. |
 | [`ui-ux/run_visual_regression.py`](./ui-ux/run_visual_regression.py) | `ui-ux`, `visual-regression`, `playwright` | screenshot, golden, pixel-diff, breakpoints | Headless visual regression against synthetic UI fixtures. |
+| [`ui-ux/viewport_matrix_tester.py`](./ui-ux/viewport_matrix_tester.py) | `ui-ux`, `responsive`, `breakpoints`, `layout` | viewport, media-queries, reflow, overflow, touch-target, 4k | Verify responsive breakpoint coverage across mobile, tablet, desktop, and 4K viewports against CSS layout definitions. |
 
 ## By tag
 
@@ -91,10 +92,12 @@ Generated from Python docstring `tags:` / `routing_hints:`. Do not hand-edit —
 - **ai-tooling:** `ai-tooling/model_memory.py`, `ai-tooling/validate_agent.py`, `ai-tooling/validate_skill.py`, `routing/generate_skill_dispatch.py`, `routing/hybrid_dispatch.py`, `tests/test_hybrid_dispatch.py`, `tests/test_validate_agent.py`, `tests/test_validate_skill.py`
 - **analysis:** `research/community_analyzer.py`
 - **anthropic:** `cli/auth/oauth_flows.py`
+- **apca:** `ui-ux/audit_accessibility.py`
 - **ast-grep:** `benchmarks/benchmark_tool_efficiency.py`, `cost-layers/extract_ast_facts.py`, `cost-layers/validate_ast_grep.py`, `cost-layers/validate_cost_layers.py`
 - **auth:** `cli/auth/keyring_vault.py`, `cli/auth/oauth_flows.py`, `cli/harness.py`, `tests/test_harness_auth.py`
 - **axe-core:** `ui-ux/audit_accessibility.py`
 - **benchmarks:** `benchmarks/benchmark_agent_fleet.py`, `benchmarks/benchmark_retrieval.py`, `benchmarks/benchmark_task_eval.py`, `benchmarks/benchmark_tool_efficiency.py`, `benchmarks/estimate_agent_costs.py`, `benchmarks/run_benchmark_suite.py`, `cost-layers/validate_cost_layers.py`, `cost-layers/validate_headroom_compression.py`, `qmd/validate_qmd_retrieval.py`, `research/benchlm_lookup.py`, `research/local_webfetch.py`, `tests/test_benchmarks.py`
+- **breakpoints:** `ui-ux/viewport_matrix_tester.py`
 - **briefing:** `research/ai_vendor_briefing.py`
 - **change-history:** `change-history/append_change_history.py`, `change-history/ensure_change_history_quarter.py`
 - **cli:** `cli/auth/keyring_vault.py`, `cli/auth/oauth_flows.py`, `cli/harness.py`, `cli/registry.py`, `cli/schema_adapter.py`, `cli/tui.py`, `tests/test_harness_auth.py`, `tests/test_harness_cli.py`
@@ -109,14 +112,12 @@ Generated from Python docstring `tags:` / `routing_hints:`. Do not hand-edit —
 - **design-tokens:** `ui-ux/compile_design_tokens.py`
 - **distillation:** `research/local_webfetch.py`
 - **docs:** `docs/run_markdownlint.py`, `docs/validate_context_budget.py`, `docs/validate_router_structure.py`, `docs/validate_structure_fast.py`, `tests/test_validate_context_budget.py`, `tests/test_validate_router_structure.py`, `tests/test_validate_structure_fast.py`
-- **downstream:** `sync/sync_and_push_downstreams.py`
 - **dry-run:** `benchmarks/benchmark_agent_fleet.py`
 - **dtcg:** `ui-ux/compile_design_tokens.py`
 - **eval:** `benchmarks/benchmark_task_eval.py`, `benchmarks/run_benchmark_suite.py`
-- **export:** `sync/sync_and_push_downstreams.py`, `sync/sync_public_repos.py`
+- **export:** `sync/sync_public_repos.py`
 - **fleet:** `benchmarks/benchmark_agent_fleet.py`, `benchmarks/run_benchmark_suite.py`, `tests/test_benchmarks.py`
 - **gemini:** `cli/auth/oauth_flows.py`
-- **git:** `sync/sync_and_push_downstreams.py`
 - **github:** `github/resolve_github_path.py`, `repos/scaffold_public_repos.py`, `tests/test_pretty_docs_security.py`
 - **harness:** `cli/auth/keyring_vault.py`, `cli/auth/oauth_flows.py`, `cli/harness.py`, `cli/registry.py`, `cli/schema_adapter.py`, `cli/tui.py`, `sync/propose_core_update.py`, `sync/pull_harness_core.py`, `sync/scaffold_harness.py`, `tests/test_harness_auth.py`, `tests/test_harness_cli.py`, `tests/test_harness_core_sync.py`, `tests/test_harness_registry.py`
 - **headroom:** `benchmarks/benchmark_tool_efficiency.py`, `cost-layers/extract_ast_facts.py`, `cost-layers/validate_ast_grep.py`, `cost-layers/validate_cost_layers.py`, `cost-layers/validate_headroom_compression.py`
@@ -124,6 +125,7 @@ Generated from Python docstring `tags:` / `routing_hints:`. Do not hand-edit —
 - **interactive:** `cli/tui.py`
 - **isolation:** `cli/harness.py`, `routing/spawn_worktree.py`, `tests/test_harness_cli.py`
 - **keyring:** `cli/auth/keyring_vault.py`, `cli/harness.py`, `tests/test_harness_auth.py`
+- **layout:** `ui-ux/viewport_matrix_tester.py`
 - **lint:** `docs/validate_structure_fast.py`
 - **maintenance:** `research/manage_social_registry.py`
 - **markdown:** `docs/run_markdownlint.py`
@@ -148,6 +150,7 @@ Generated from Python docstring `tags:` / `routing_hints:`. Do not hand-edit —
 - **registry:** `cli/registry.py`, `research/manage_social_registry.py`, `tests/test_harness_registry.py`
 - **repos:** `repos/scaffold_public_repos.py`
 - **research:** `cost-layers/validate_cost_layers.py`, `research/ai_vendor_briefing.py`, `research/benchlm_lookup.py`, `research/community_analyzer.py`, `research/local_webfetch.py`, `research/manage_social_registry.py`, `tests/test_local_webfetch.py`
+- **responsive:** `ui-ux/viewport_matrix_tester.py`
 - **results:** `tests/test_validate_router_structure.py`
 - **retrieval:** `benchmarks/benchmark_retrieval.py`, `benchmarks/run_benchmark_suite.py`, `qmd/validate_qmd_retrieval.py`, `tests/test_benchmarks.py`
 - **routing:** `ai-tooling/validate_agent.py`, `ai-tooling/validate_skill.py`, `cli/harness.py`, `cost-layers/validate_prompt_caching.py`, `docs/validate_router_structure.py`, `routing/generate_routing_index.py`, `routing/generate_script_index.py`, `routing/generate_skill_dispatch.py`, `routing/hybrid_dispatch.py`, `routing/resolve_skill_graph.py`, `routing/spawn_worktree.py`, `tests/test_hybrid_dispatch.py`, `tests/test_pacing.py`, `tests/test_skill_graph.py`
@@ -160,12 +163,12 @@ Generated from Python docstring `tags:` / `routing_hints:`. Do not hand-edit —
 - **socials:** `research/community_analyzer.py`, `research/manage_social_registry.py`
 - **subagents:** `tests/test_subagent_context_config.py`
 - **switcher:** `cli/registry.py`, `cli/tui.py`, `tests/test_harness_registry.py`
-- **sync:** `sync/propose_core_update.py`, `sync/pull_harness_core.py`, `sync/scaffold_harness.py`, `sync/sync_and_push_downstreams.py`, `sync/sync_public_repos.py`, `tests/test_harness_core_sync.py`
+- **sync:** `sync/propose_core_update.py`, `sync/pull_harness_core.py`, `sync/scaffold_harness.py`, `sync/sync_public_repos.py`, `tests/test_harness_core_sync.py`
 - **tasks:** `benchmarks/benchmark_task_eval.py`
-- **tests:** `tests/test_benchmarks.py`, `tests/test_harness_auth.py`, `tests/test_harness_cli.py`, `tests/test_harness_core_sync.py`, `tests/test_harness_registry.py`, `tests/test_hybrid_dispatch.py`, `tests/test_local_webfetch.py`, `tests/test_pacing.py`, `tests/test_pretty_docs_security.py`, `tests/test_qmd_preflight.py`, `tests/test_skill_graph.py`, `tests/test_subagent_context_config.py`, `tests/test_ui_ux.py`, `tests/test_validate_agent.py`, `tests/test_validate_context_budget.py`, `tests/test_validate_prompt_caching.py`, `tests/test_validate_router_structure.py`, `tests/test_validate_skill.py`, `tests/test_validate_structure_fast.py`
+- **tests:** `tests/test_benchmarks.py`, `tests/test_harness_auth.py`, `tests/test_harness_cli.py`, `tests/test_harness_core_sync.py`, `tests/test_harness_registry.py`, `tests/test_hybrid_dispatch.py`, `tests/test_local_webfetch.py`, `tests/test_pacing.py`, `tests/test_pretty_docs_security.py`, `tests/test_qmd_preflight.py`, `tests/test_skill_graph.py`, `tests/test_subagent_context_config.py`, `tests/test_ui_ux.py`, `tests/test_ui_ux_scripts.py`, `tests/test_validate_agent.py`, `tests/test_validate_context_budget.py`, `tests/test_validate_prompt_caching.py`, `tests/test_validate_router_structure.py`, `tests/test_validate_skill.py`, `tests/test_validate_structure_fast.py`
 - **tokens:** `benchmarks/benchmark_retrieval.py`, `benchmarks/benchmark_tool_efficiency.py`, `benchmarks/estimate_agent_costs.py`
 - **tui:** `cli/tui.py`, `tests/test_harness_registry.py`
-- **ui-ux:** `tests/test_ui_ux.py`, `ui-ux/audit_accessibility.py`, `ui-ux/compile_design_tokens.py`, `ui-ux/run_visual_regression.py`
+- **ui-ux:** `tests/test_ui_ux.py`, `tests/test_ui_ux_scripts.py`, `ui-ux/audit_accessibility.py`, `ui-ux/compile_design_tokens.py`, `ui-ux/run_visual_regression.py`, `ui-ux/viewport_matrix_tester.py`
 - **validation:** `docs/validate_context_budget.py`, `docs/validate_structure_fast.py`, `tests/test_validate_context_budget.py`, `tests/test_validate_router_structure.py`, `tests/test_validate_structure_fast.py`
 - **vault:** `cli/auth/keyring_vault.py`
 - **visual-regression:** `ui-ux/run_visual_regression.py`

@@ -1,5 +1,8 @@
 # Standalone agents
 
+> [!IMPORTANT]
+> **Human-Facing Documentation Only**: This README is maintained strictly for human developers and repository visitors. Autonomous AI agents MUST NOT ingest or utilize `README.md` files for operational instructions or context. All agent directives and navigation reside strictly in [`AGENTS.md`](../../AGENTS.md) and [`routing/`](../../routing/).
+
 Human overview: specialist definitions live in `<id>/AGENT.md`. Optional host stubs under `.cursor/agents/` only point here.
 
 **Agents do not use this README as a catalog.** Catalogs are `AGENT.md` (Schema V2) + [`../../routing/skill-dispatch.md`](../../routing/skill-dispatch.md) / [`../../routing/area-map.md`](../../routing/area-map.md). Tiers: [`model-tiers.md`](./model-tiers.md).
@@ -13,14 +16,21 @@ Human index (not agent SoT):
 | [`harness-operator/`](./harness-operator/) | Harness lifecycle, control plane, cost layers, skill/agent builder, repository maintenance | standard |
 | [`document-operator/`](./document-operator/) | Technical writing, diagrams, reports, Confluence/Slack/Google collab, anti-slop | standard |
 | [`research-operator/`](./research-operator/) | Deep technical research, BenchLM, AI vendor tracking, community intelligence, web crawl | high |
-| [`security-tooling-operator/`](./security-tooling-operator/) | Defensive assessments, threat modeling, AD/Windows audit, network discovery, packet review | standard |
+
+### UI/UX specialists
+
+| Specialist | Role | Tier |
+| --- | --- | --- |
+| [`design-system-architect/`](./design-system-architect/) | DTCG design tokens, CSS variables, modular typography scales, multi-theme token switching, component variant matrices | high |
+| [`a11y-compliance-operator/`](./a11y-compliance-operator/) | Automated WCAG 2.2 AA accessibility audits, screen reader semantics (ARIA/landmarks/accname), keyboard focus navigation & traps | standard |
+| [`interaction-designer/`](./interaction-designer/) | Micro-interaction choreography, navigation flow specs, information architecture maps, touch targets, responsive reflow | standard |
+| [`visual-qa-operator/`](./visual-qa-operator/) | Headless multi-breakpoint screenshot sweeps, pixel diffs against golden baselines, component variant visual verification | standard |
 
 ### Coordinator & true specialists
 
 | Specialist | Role | Tier |
 | --- | --- | --- |
 | [`router/`](./router/) | Parent coordinator: classify, isolate, spawn | standard |
-| [`as-code-agent/`](./as-code-agent/) | Dedicated Terraform/OpenTofu/IaC authoring & plan validation | high |
 | [`detailed-activity/`](./detailed-activity/) | Dedicated adversarial / antagonistic review and challenge audits | high |
 | [`benchmark-agent/`](./benchmark-agent/) | Empirical benchmarking: cost estimation, fleet dry runs, retrieval, tool efficiency | standard |
 | [`github-ops/`](./github-ops/) | GitHub PR workflow, branch discipline, issue management | standard |
@@ -38,6 +48,5 @@ Human index (not agent SoT):
 | [`script-ops/`](./script-ops/) | `harness-operator` | standard |
 | [`artifact-agent/`](./artifact-agent/) | `document-operator` | standard |
 | [`reference-ops/`](./reference-ops/) | `document-operator` | standard |
-| [`repo-sync-ops/`](./repo-sync-ops/) | `harness-operator` | standard |
 
 A2A specifications & schemas: canonical in `AGENT.md` (Schema V2); see also [`../a2a/agent-cards/README.md`](../a2a/agent-cards/README.md).

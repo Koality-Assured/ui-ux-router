@@ -56,13 +56,21 @@ class TestTier1FastPath(unittest.TestCase):
             ("isolate the worktree", "isolate-work", "router"),
             ("qmd search docs", "qmd-usage", "qmd-ops"),
             ("qmd commands and retrieval", "qmd-usage", "qmd-ops"),
-            ("run noir scan on api", "noir-scan", "artifact-agent"),
             ("render mermaid diagram", "mermaid-diagram", "artifact-agent"),
             ("ast-grep precision retrieval", "ast-grep", "router-maintenance"),
             ("headroom context compression", "headroom", "router-maintenance"),
             ("markdownlint fix md001", "markdownlint", "documentation-ops"),
             ("deep research into cloud models", "deep-research", "detailed-activity"),
             ("create memory checkpoint", "memory-create", "ai-tooling-ops"),
+            ("compile design tokens", "design-token-manage", "design-system-architect"),
+            ("design-token-manage", "design-token-manage", "design-system-architect"),
+            ("component variant matrix", "component-variant-matrix", "design-system-architect"),
+            ("typography scale", "typography-scale-calc", "design-system-architect"),
+            ("micro-interactions", "micro-interaction-choreography", "interaction-designer"),
+            ("navigation flows", "navigation-flow-spec", "interaction-designer"),
+            ("wcag accessibility audit", "wcag-accessibility-audit", "a11y-compliance-operator"),
+            ("responsive breakpoint verify", "responsive-breakpoint-verify", "interaction-designer"),
+            ("visual regression audit", "visual-regression-audit", "visual-qa-operator"),
         ]
         for query, expected_skill, expected_owner in test_cases:
             res = self.tier1.evaluate(query)
@@ -99,12 +107,32 @@ class TestTier1FastPath(unittest.TestCase):
         self.assertIn("antagonistic-review", res.conflicting_skills)
 
         # Another multi-intent query
-        query2 = "Run noir scan and create mermaid diagram"
+        query2 = "Compile design tokens and run visual regression audit"
         res2 = self.tier1.evaluate(query2)
         self.assertFalse(res2.matched)
         self.assertEqual(res2.reason, "multi_intent_conflict")
-        self.assertIn("noir-scan", res2.conflicting_skills)
-        self.assertIn("mermaid-diagram", res2.conflicting_skills)
+        self.assertIn("design-token-manage", res2.conflicting_skills)
+        self.assertIn("visual-regression-audit", res2.conflicting_skills)
+
+    def test_ui_ux_fast_path_matching(self) -> None:
+        """Verify all 8 UI/UX domain skills are properly resolved by Tier 1 Fast-Path."""
+        cases = [
+            ("compile_design_tokens", "design-token-manage", "design-system-architect"),
+            ("design-token-manage", "design-token-manage", "design-system-architect"),
+            ("generate component-variant-matrix", "component-variant-matrix", "design-system-architect"),
+            ("calculate typography-scale-calc", "typography-scale-calc", "design-system-architect"),
+            ("micro-interaction-choreography", "micro-interaction-choreography", "interaction-designer"),
+            ("navigation-flow-spec", "navigation-flow-spec", "interaction-designer"),
+            ("run wcag-accessibility-audit", "wcag-accessibility-audit", "a11y-compliance-operator"),
+            ("responsive-breakpoint-verify", "responsive-breakpoint-verify", "interaction-designer"),
+            ("visual-regression-audit", "visual-regression-audit", "visual-qa-operator"),
+        ]
+        for query, expected_skill, expected_owner in cases:
+            res = self.tier1.evaluate(query)
+            self.assertTrue(res.matched, f"Query '{query}' should match Tier 1")
+            self.assertEqual(res.skill, expected_skill)
+            self.assertEqual(res.owner_agent, expected_owner)
+            self.assertEqual(res.confidence, 1.0)
 
 
 class TestTier2BM25(unittest.TestCase):
@@ -126,26 +154,15 @@ class TestTier2BM25(unittest.TestCase):
         self.assertNotIn("on", tokens)
 
     def test_bm25_semantic_ranking_skills(self) -> None:
-        if not _skill_md("noir-scan").is_file():
-            self.skipTest("noir-scan is instance-only; omitted from wiki template")
         # Query without exact fast-path keywords but matching skill purpose
-        query = "discover shadow routes and attack surface parameters"
+        query = "automated axe checks and color contrast on synthetic fixtures"
         res = self.bm25.search(query, top_k=3)
         self.assertTrue(len(res.candidates) > 0)
         top = res.candidates[0]
-        self.assertEqual(top.name, "noir-scan")
-        self.assertEqual(top.owner_agent, "artifact-agent")
+        self.assertEqual(top.name, "wcag-accessibility-audit")
+        self.assertEqual(top.owner_agent, "a11y-compliance-operator")
         self.assertGreater(top.score, 0.0)
         self.assertGreater(top.confidence, 0.5)
-
-    def test_bm25_ranking_cloud_logs(self) -> None:
-        if not (_skill_md("aws-logs").is_file() or _skill_md("aws-read").is_file()):
-            self.skipTest("aws-logs/aws-read are instance-only; omitted from wiki template")
-        query = "inspect amazon cloudwatch log streams via oauth"
-        res = self.bm25.search(query, top_k=3)
-        self.assertTrue(len(res.candidates) > 0)
-        top_names = [c.name for c in res.candidates]
-        self.assertTrue("aws-logs" in top_names or "aws-read" in top_names)
 
     def test_bm25_empty_query(self) -> None:
         res = self.bm25.search("", top_k=3)
@@ -215,7 +232,7 @@ class TestHybridDispatcher(unittest.TestCase):
 
     def test_dispatch_tier2_bm25(self) -> None:
         # Tier 2 specific invocation
-        res = self.dispatcher.dispatch("finding shadow endpoints and routes", tier="2")
+        res = self.dispatcher.dispatch("automated axe checks and color contrast on synthetic fixtures", tier="2")
         self.assertEqual(res.selected_tier, 2)
         self.assertIsNotNone(res.final_target)
         self.assertIsNotNone(res.tier2)

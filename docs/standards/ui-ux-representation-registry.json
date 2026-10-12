@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "standards_source": "ui-ux-representations.md",
+  "purpose": "Machine-readable route, alias, and check-profile index for the UI/UX design and accessibility representation matrix.",
+  "check_profiles": {
+    "wcag_22_aa": "Axe-core automated scan with WCAG 2.2 tags, contrast ratios, and touch target bounds",
+    "dtcg_token_lint": "Verification of $value, $type, group inheritance, and resolution of curly-brace aliases",
+    "pixel_diff_match": "Playwright headless screenshot comparison against golden baseline with frozen motion",
+    "keyboard_focus_path": "Tab order verification, focus indicator visibility, and absence of keyboard traps",
+    "reduced_motion": "Verification that all CSS transitions and animations evaluate to 0s under prefers-reduced-motion"
+  },
+  "representations": [
+    {
+      "id": "design_tokens",
+      "standard_heading": "Design token dictionaries and palettes",
+      "aliases": ["tokens", "dtcg", "design_system_tokens", "color_tokens"],
+      "adjacent_routes": ["component_variant_matrix", "theme_palette"],
+      "default_check_profiles": ["dtcg_token_lint"],
+      "asset_types": [
+        {"id": "dtcg_json", "aliases": ["tokens_json"], "check_profiles": ["dtcg_token_lint"]},
+        {"id": "compiled_css_vars", "aliases": ["css_variables"], "check_profiles": ["dtcg_token_lint"]},
+        {"id": "tailwind_preset", "aliases": ["tailwind_config"], "check_profiles": ["dtcg_token_lint"]}
+      ]
+    },
+    {
+      "id": "component_variant_matrix",
+      "standard_heading": "Component variant matrices and states",
+      "aliases": ["components", "variants", "ui_components", "component_states"],
+      "adjacent_routes": ["visual_golden_snapshot", "accessible_dom_view"],
+      "default_check_profiles": ["wcag_22_aa", "keyboard_focus_path"],
+      "asset_types": [
+        {"id": "html_component_spec", "aliases": ["html_template"], "check_profiles": ["wcag_22_aa", "keyboard_focus_path"]},
+        {"id": "variant_state_table", "aliases": ["state_matrix"], "check_profiles": ["wcag_22_aa"]}
+      ]
+    },
+    {
+      "id": "visual_golden_snapshot",
+      "standard_heading": "Visual regression golden screenshots",
+      "aliases": ["goldens", "screenshots", "visual_regression", "pixel_diff"],
+      "adjacent_routes": ["component_variant_matrix", "theme_palette"],
+      "default_check_profiles": ["pixel_diff_match", "reduced_motion"],
+      "asset_types": [
+        {"id": "png_golden_viewport", "aliases": ["viewport_png"], "check_profiles": ["pixel_diff_match"]},
+        {"id": "pixel_diff_report", "aliases": ["diff_report"], "check_profiles": ["pixel_diff_match"]}
+      ]
+    },
+    {
+      "id": "accessible_dom_view",
+      "standard_heading": "Accessible DOM and ARIA snapshots",
+      "aliases": ["a11y_tree", "aria_snapshot", "axe_report"],
+      "adjacent_routes": ["component_variant_matrix", "micro_interaction_spec"],
+      "default_check_profiles": ["wcag_22_aa", "keyboard_focus_path"],
+      "asset_types": [
+        {"id": "aria_yaml_tree", "aliases": ["aria_tree"], "check_profiles": ["keyboard_focus_path"]},
+        {"id": "axe_audit_report", "aliases": ["axe_json"], "check_profiles": ["wcag_22_aa"]}
+      ]
+    },
+    {
+      "id": "micro_interaction_spec",
+      "standard_heading": "Micro-interaction and motion specs",
+      "aliases": ["motion", "interaction", "animation_spec", "choreography"],
+      "adjacent_routes": ["component_variant_matrix", "accessible_dom_view"],
+      "default_check_profiles": ["reduced_motion", "keyboard_focus_path"],
+      "asset_types": [
+        {"id": "timing_curve_spec", "aliases": ["cubic_bezier"], "check_profiles": ["reduced_motion"]},
+        {"id": "gesture_touch_spec", "aliases": ["touch_gesture"], "check_profiles": ["keyboard_focus_path"]}
+      ]
+    },
+    {
+      "id": "theme_palette",
+      "standard_heading": "Multi-theme color palettes and contrast",
+      "aliases": ["theme", "palette", "dark_mode", "high_contrast"],
+      "adjacent_routes": ["design_tokens", "visual_golden_snapshot"],
+      "default_check_profiles": ["wcag_22_aa", "dtcg_token_lint"],
+      "asset_types": [
+        {"id": "theme_contrast_table", "aliases": ["contrast_matrix"], "check_profiles": ["wcag_22_aa"]},
+        {"id": "dark_mode_overrides", "aliases": ["dark_tokens"], "check_profiles": ["dtcg_token_lint", "wcag_22_aa"]}
+      ]
+    }
+  ]
+}

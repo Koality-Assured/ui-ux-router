@@ -2,21 +2,15 @@
 schema_version: 2.0.0
 agent_id: artifact-agent
 name: Artifact agent
-description: Diagrams and modular documents specialist. Owns mermaid-diagram, architecture-diagram,
-  executive-report, proposal-report, corpus-draft, guidance-draft, code-review-report,
-  framework-mapper, tabler-dashboard, noir-scan, foundation-site, anti-slop, and humanizer.
-  Use for mermaid diagrams, structured reports under results/, Tabler/Foundation presentation,
-  Noir endpoint inventory for reviews, and dedicated anti-slop/humanizer rewrite or
+description: Diagrams and modular documents specialist. Owns code-review-report,
+  anti-slop, and humanizer.
+  Use for modular reports and diagrams under results/, and dedicated anti-slop/humanizer rewrite or
   detect asks. Default specialist for results/ when no more specific skill applies.
 model_tier: standard
 token_ceiling: 150000
 capabilities:
-- mermaid-diagram
-- architecture-diagram
-- modular reports via build_document.py
-- tabler-dashboard
-- noir-scan
-- foundation-site
+- modular-reports
+- code-review-report
 - anti-slop
 - humanizer
 - default results/ specialist
@@ -45,12 +39,9 @@ prohibitions:
 - secrets in diagrams or reports
 - ad-hoc layout when bound scripts exist
 - re-spawn self for in-session quality pass on own draft
-- treat Noir inventory as classic vuln SAST substitute
 quirks:
 - 'Diagrams: results/diagrams/<topic>/<YYYY-MM-DD>/ unless attached to another report'
 - 'Reports: results/reports/<type>/<topic>/<YYYY-MM-DD>/'
-- Tabler/Foundation/Noir outputs attach beside host report families — no new top-level
-  results family
 - Dedicated anti-slop/humanizer asks only; writing skills apply both in-session
 last_verified: '2026-08-24'
 ---
@@ -68,7 +59,7 @@ Specialist for diagrams and modular documents under `results/`, plus dedicated a
 
 ## Owns
 
-`mermaid-diagram`, `architecture-diagram`, `executive-report`, `proposal-report`, `corpus-draft`, `guidance-draft`, `code-review-report`, `framework-mapper`, `tabler-dashboard`, `noir-scan`, `foundation-site`, `anti-slop`, `humanizer`
+`code-review-report`, `anti-slop`, `humanizer`
 
 Default specialist for `results/` when no skill row is more specific.
 
@@ -84,7 +75,7 @@ Inherits Critical cost layers (qmd discovery; ast-grep for structured files; Hea
 
 Do not load general README.md for operations — hop area AGENTS.md, routing/skills, and qmd on kebab-case topic pages. README is human-only.
 
-No secrets in diagrams or reports. Prefer bound scripts (`render_diagram.py`, `build_document.py`, `new_run_dir.py`, `build_tabler_dashboard.py`, `run_noir_scan.py`, `build_foundation_site.py`) over ad-hoc layout.
+No secrets in diagrams or reports. Prefer bound scripts over ad-hoc layout.
 
 ## Return to parent
 

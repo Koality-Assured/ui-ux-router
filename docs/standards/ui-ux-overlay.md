@@ -18,10 +18,10 @@ Propose generic core changes: `python scripts/sync/propose_core_update.py --dry-
 
 | Agent | Tier | Owns |
 | --- | --- | --- |
-| [`design-system-architect`](../../ai-tooling/agents/design-system-architect/AGENT.md) | high | `design-token-manage` |
-| [`a11y-compliance-operator`](../../ai-tooling/agents/a11y-compliance-operator/AGENT.md) | standard | `wcag-accessibility-audit` |
+| [`design-system-architect`](../../ai-tooling/agents/design-system-architect/AGENT.md) | high | `design-token-manage`, `component-variant-matrix`, `typography-scale-calc`, `theme-token-switcher` |
+| [`a11y-compliance-operator`](../../ai-tooling/agents/a11y-compliance-operator/AGENT.md) | standard | `wcag-accessibility-audit`, `screen-reader-semantics`, `focus-keyboard-navigation` |
 | [`visual-qa-operator`](../../ai-tooling/agents/visual-qa-operator/AGENT.md) | standard | `visual-regression-audit` |
-| [`interaction-designer`](../../ai-tooling/agents/interaction-designer/AGENT.md) | standard | `responsive-breakpoint-verify` |
+| [`interaction-designer`](../../ai-tooling/agents/interaction-designer/AGENT.md) | standard | `responsive-breakpoint-verify`, `micro-interaction-choreography`, `navigation-flow-spec`, `information-architecture-map` |
 
 Skills live under `ai-tooling/skills/ui-ux/<name>/SKILL.md`.
 
