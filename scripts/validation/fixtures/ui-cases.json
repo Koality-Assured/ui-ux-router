@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "case_id": "button-dialog-tokens-001",
+      "title": "Accessible Design System Button and Dialog Token Pack",
+      "request": {
+        "schema_version": "1.0",
+        "request_id": "req-ui-001",
+        "version": "1.0",
+        "operation": "component_variant_matrix",
+        "design_system_profile": {
+          "system_id": "SYNTH-DESIGN-SYSTEM-101",
+          "token_format": "dtcg_2025_10",
+          "color_spaces": ["srgb", "display_p3"],
+          "theme_modes": ["light", "dark"]
+        },
+        "target_viewports": [375, 768, 1280, 1920],
+        "intent": {
+          "primary_objective": "Build accessible primary/secondary button components and modal dialog",
+          "user_interaction_flow": "Focus trap on modal open, Esc to close, 24px touch targets",
+          "preserve_tokens": ["color.primary", "spacing.base"]
+        },
+        "representations": [
+          {
+            "id": "button-variant-spec",
+            "route": "component_variant_matrix",
+            "asset": {"type": "html_component_spec"},
+            "role": "primary",
+            "delivery": {
+              "intended_use": "component_library",
+              "format": "html"
+            }
+          },
+          {
+            "id": "brand-dtcg-tokens",
+            "route": "design_tokens",
+            "asset": {"type": "dtcg_json"},
+            "role": "supporting",
+            "delivery": {
+              "intended_use": "design_tokens_bundle",
+              "format": "json"
+            }
+          }
+        ],
+        "constraints": [
+          {
+            "text": "Pointer target minimum 24x24 CSS pixels (WCAG 2.5.8)",
+            "source": "wcag",
+            "status": "required",
+            "hardness": "hard"
+          },
+          {
+            "text": "Text contrast ratio >= 4.5:1 against background (WCAG 1.4.3)",
+            "source": "wcag",
+            "status": "required",
+            "hardness": "hard"
+          },
+          {
+            "text": "Motion duration evaluates to 0s on prefers-reduced-motion",
+            "source": "system_contract",
+            "status": "required",
+            "hardness": "hard"
+          }
+        ],
+        "references": [
+          {"id": "wcag_22_spec", "description": "W3C WCAG 2.2 Recommendation"}
+        ],
+        "accessibility_standards": {
+          "wcag_target_level": "AA",
+          "min_touch_target_px": 24,
+          "min_text_contrast_ratio": 4.5,
+          "keyboard_focusable_only": true,
+          "reduced_motion_supported": true
+        },
+        "audience_delivery": {
+          "recipient_role": "front_end_lead",
+          "delivery_format": "html"
+        },
+        "provenance": {
+          "model_tier": "standard",
+          "timestamp_utc": "2026-10-12T14:00:00Z"
+        },
+        "open_questions": [],
+        "review_handoff": {
+          "owner": "design-system-architect",
+          "reviewer": "accessibility-conformance-auditor",
+          "acceptance_tests": [
+            "verify_touch_target_bounds",
+            "verify_wcag_contrast",
+            "verify_dtcg_syntax"
+          ],
+          "accessibility_gate_passed": true
+        }
+      },
+      "deliverables": [
+        {
+          "representation_id": "button-variant-spec",
+          "route": "component_variant_matrix",
+          "asset_type": "html_component_spec",
+          "role": "primary",
+          "status": "complete",
+          "touch_target_px": 32,
+          "contrast_ratio": 5.4,
+          "wcag_violations": []
+        },
+        {
+          "representation_id": "brand-dtcg-tokens",
+          "route": "design_tokens",
+          "asset_type": "dtcg_json",
+          "role": "supporting",
+          "status": "complete",
+          "tokens_compiled": 24,
+          "dtcg_valid": true
+        }
+      ]
+    }
+  ]
+}

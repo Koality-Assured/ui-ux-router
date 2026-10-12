@@ -2,7 +2,7 @@
 doc_kind: routing_map
 canonical_id: agent-dispatch
 topics: [routing, agents, specialists]
-generated_at_utc: 2026-10-10T08:44:46Z
+generated_at_utc: 2026-10-12T14:08:50Z
 generator: scripts/routing/generate_routing_index.py
 ---
 
@@ -15,6 +15,7 @@ Generated from `ai-tooling/agents/*/AGENT.md` frontmatter. Do not hand-edit — 
 | Agent ID | Name | Model tier | Isolation modes | Role / Description |
 | --- | --- | --- | --- | --- |
 | [`a11y-compliance-operator`](../ai-tooling/agents/a11y-compliance-operator/AGENT.md) | A11y compliance operator | `standard` | `mutate`, `read-only` | UI/UX specialist for automated WCAG 2.2 AA accessibility audits, screen reader semantics, and keyboard focus navigation. Use when running axe-core tags, auditing ARIA landmarks, checking screen reader semantics, or managing keyboard focus traps. Do not use for visual goldens (visual-qa-operator) or token compile (design-system-architect). Axe is not certification. |
+| [`accessibility-conformance-auditor`](../ai-tooling/agents/accessibility-conformance-auditor/AGENT.md) | Accessibility and visual conformance auditor | `high` | `read-only` | Strictly read-only independent auditor specialist for validating UI components, design tokens, and visual regression snapshots against WCAG 2.2 Level AA criteria, DTCG token standards, and target size minimums. It cannot mutate files or approve releases. |
 | [`ai-tooling-ops`](../ai-tooling/agents/ai-tooling-ops/AGENT.md) | AI tooling operations | `standard` | `mutate`, `read-only` | AI-tooling specialist. Owns skill-builder, skill-dry-run, memory-create/adjust/cleanup, and agent-builder. Use for skills, user/agent memory checkpoints, A2A specs, and agent definitions. Do not use for model-memory-operate (memory-operator). Spawned by the router; do not edit docs/ standards unless assigned. |
 | [`artifact-agent`](../ai-tooling/agents/artifact-agent/AGENT.md) | Artifact agent | `standard` | `mutate`, `read-only` | Diagrams and modular documents specialist. Owns code-review-report, anti-slop, and humanizer. Use for modular reports and diagrams under results/, and dedicated anti-slop/humanizer rewrite or detect asks. Default specialist for results/ when no more specific skill applies. |
 | [`benchmark-agent`](../ai-tooling/agents/benchmark-agent/AGENT.md) | Benchmark Agent | `standard` | `mutate`, `read-only` | Specialist for empirical benchmarks across agent cost estimation, paired skill execution economics, multi-agent fleet dry-run simulations, retrieval quality, tool compression efficiency, and coding task evaluations. Use when measuring agent and skill costs, executing dry-run validation sweeps, running retrieval/compression benchmarks, or scoring agent task performance. |
@@ -40,6 +41,7 @@ Generated from `ai-tooling/agents/*/AGENT.md` frontmatter. Do not hand-edit — 
 | Agent | Primary capabilities | Allowed tools | Delegation targets |
 | --- | --- | --- | --- |
 | [`a11y-compliance-operator`](../ai-tooling/agents/a11y-compliance-operator/AGENT.md) | wcag-22-aa-automated-audit, axe-core-tag-runs, keyboard-trap-detection, aria-landmark-and-contrast-checks (+2 more) | `read_file`, `write_file`, `replace_file_content`, `run_command`, `grep_search` | `router`, `document-operator`, `interaction-designer` |
+| [`accessibility-conformance-auditor`](../ai-tooling/agents/accessibility-conformance-auditor/AGENT.md) | wcag-22-conformance-audit, dtcg-token-syntax-audit, visual-regression-diff-audit, keyboard-focus-gatekeeper (+1 more) | `read_file`, `run_command`, `grep_search` | `design-system-architect`, `interaction-designer`, `visual-qa-operator` |
 | [`ai-tooling-ops`](../ai-tooling/agents/ai-tooling-ops/AGENT.md) | skill-builder, skill-dry-run, harness-review, memory-create (+3 more) | `read_file`, `write_file`, `replace_file_content`, `run_command`, `grep_search` (+1 more) | `router-maintenance`, `script-ops`, `documentation-ops` |
 | [`artifact-agent`](../ai-tooling/agents/artifact-agent/AGENT.md) | modular-reports, code-review-report, anti-slop, humanizer (+1 more) | `read_file`, `write_file`, `replace_file_content`, `run_command`, `grep_search` (+1 more) | `router`, `detailed-activity` |
 | [`benchmark-agent`](../ai-tooling/agents/benchmark-agent/AGENT.md) | agent-cost-estimator, agent-fleet-benchmark, retrieval-benchmark, tool-efficiency-benchmark (+4 more) | `read_file`, `write_file`, `replace_file_content`, `run_command`, `grep_search` (+1 more) | `artifact-agent`, `router-maintenance`, `script-ops` |
