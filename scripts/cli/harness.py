@@ -9,7 +9,6 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
-import os
 import re
 import shutil
 import subprocess
@@ -24,9 +23,8 @@ for _p in (str(_LIB_DIR), str(_SCRIPTS_DIR)):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-from areas import AreasYamlError, load_area_ids, load_area_records  # noqa: E402
-from md import agent_paths, load_agent_record  # noqa: E402
-from paths import REPO_ROOT  # noqa: E402
+from areas import AreasYamlError, load_area_ids, load_area_records
+from md import agent_paths, load_agent_record
 
 SLUG_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CONVENTIONAL_COMMIT_PATTERN = re.compile(
@@ -295,7 +293,7 @@ def cmd_branch(args: argparse.Namespace) -> int:
         return 2
 
     # 3. Check for claim collisions
-    from routing.spawn_worktree import cmd_add, overlapping  # noqa: E402
+    from routing.spawn_worktree import cmd_add, overlapping
 
     active_claims = load_claims(primary_root)
     hits = overlapping(areas_list, active_claims, ignore_slug=slug)
@@ -549,13 +547,7 @@ def cmd_clean(args: argparse.Namespace) -> int:
         is_stale = not c_path.exists()
         is_merged = branch in merged_branches
 
-        if args.slug and slug == args.slug:
-            targets.append(slug)
-        elif args.all:
-            targets.append(slug)
-        elif args.merged and is_merged:
-            targets.append(slug)
-        elif args.stale and is_stale:
+        if args.slug and slug == args.slug or args.all or args.merged and is_merged or args.stale and is_stale:
             targets.append(slug)
 
     if not args.slug and not args.all and not args.merged and not args.stale:
@@ -585,7 +577,7 @@ def cmd_clean(args: argparse.Namespace) -> int:
         print("No matching worktrees found to clean.")
         return 0
 
-    from routing.spawn_worktree import cmd_remove  # noqa: E402
+    from routing.spawn_worktree import cmd_remove
 
     print(f"Cleaning {len(targets)} worktree(s): {', '.join(targets)}")
     for slug in targets:
@@ -675,7 +667,7 @@ def cmd_auth_status(args: argparse.Namespace) -> int:
             if exp_val is None:
                 exp_str = "Never (API Key)"
             elif isinstance(exp_val, (int, float)):
-                exp_str = dt.datetime.fromtimestamp(exp_val, dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+                exp_str = dt.datetime.fromtimestamp(exp_val, dt.UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
             else:
                 exp_str = str(exp_val)
 

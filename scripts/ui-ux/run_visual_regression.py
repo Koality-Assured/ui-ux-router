@@ -11,7 +11,6 @@ that owns the committed baselines.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
@@ -19,7 +18,7 @@ _HERE = Path(__file__).resolve().parent
 if str(_HERE) not in sys.path:
     sys.path.insert(0, str(_HERE))
 
-from _synth import (  # noqa: E402
+from _synth import (
     CANVAS_HEIGHT,
     PIXEL_THRESHOLD,
     VIEWPORTS,
@@ -139,10 +138,7 @@ def run(
                 gold_dir.mkdir(parents=True, exist_ok=True)
                 gold_path.write_bytes(png)
                 row["status"] = "updated"
-            elif dry_run and not gold_path.is_file():
-                row["status"] = "missing-baseline"
-                mismatches += 1
-            elif not gold_path.is_file():
+            elif dry_run and not gold_path.is_file() or not gold_path.is_file():
                 row["status"] = "missing-baseline"
                 mismatches += 1
             else:

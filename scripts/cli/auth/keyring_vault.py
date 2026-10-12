@@ -10,7 +10,6 @@ import datetime as dt
 import json
 import os
 import secrets
-import sys
 import threading
 import time
 from pathlib import Path
@@ -245,7 +244,7 @@ class EncryptedFileVault:
                 self.recover_corrupted(backup=True)
                 data = {}
             rec = dict(token_data)
-            rec["updated_at"] = dt.datetime.now(dt.timezone.utc).isoformat()
+            rec["updated_at"] = dt.datetime.now(dt.UTC).isoformat()
             data[norm_provider] = rec
             self._save_all(data)
 
@@ -277,7 +276,7 @@ class EncryptedFileVault:
                 return None
             backup_path = None
             if backup:
-                timestamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%d_%H%M%S")
+                timestamp = dt.datetime.now(dt.UTC).strftime("%Y%m%d_%H%M%S")
                 backup_path = self.path.with_name(f"{self.path.name}.corrupted.{timestamp}")
                 try:
                     self.path.replace(backup_path)
@@ -365,7 +364,7 @@ class KeyringVault:
             raise RuntimeError("Keyring is not available on this platform")
         norm_provider = provider.lower().strip()
         rec = dict(token_data)
-        rec["updated_at"] = dt.datetime.now(dt.timezone.utc).isoformat()
+        rec["updated_at"] = dt.datetime.now(dt.UTC).isoformat()
         with self._lock:
             try:
                 self._keyring.set_password(self.service_name, norm_provider, json.dumps(rec))

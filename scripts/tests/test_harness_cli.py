@@ -23,16 +23,11 @@ for _p in (str(_SCRIPTS), str(_LIB)):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-from cli.harness import (  # noqa: E402
+from cli.harness import (
     SLUG_PATTERN,
     build_parser,
-    cmd_agent,
-    cmd_branch,
-    cmd_clean,
-    cmd_status,
     format_branch_name,
     is_conventional_commit,
-    load_claims,
     main,
 )
 

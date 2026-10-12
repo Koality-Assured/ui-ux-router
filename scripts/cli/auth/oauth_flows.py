@@ -10,11 +10,9 @@ import base64
 import getpass
 import hashlib
 import http.server
-import json
 import re
 import secrets
 import sys
-import threading
 import time
 import urllib.parse
 import webbrowser
@@ -189,7 +187,7 @@ def extract_code_from_input(user_input: str) -> str:
     if "code=" in clean:
         parsed = urllib.parse.urlparse(clean)
         qs = urllib.parse.parse_qs(parsed.query)
-        if "code" in qs and qs["code"]:
+        if qs.get("code"):
             return qs["code"][0]
     return clean
 

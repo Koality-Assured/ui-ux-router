@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "case_id": "fail-case-001",
+      "title": "Failing Case 1",
+      "request": {
+        "schema_version": "1.0",
+        "request_id": "req-ui-fail",
+        "operation": "component_variant_matrix",
+        "design_system_profile": {
+          "system_id": "SYNTH-DESIGN-SYSTEM-FAIL",
+          "token_format": "dtcg_2025_10"
+        },
+        "accessibility_standards": {
+          "min_touch_target_px": 20,
+          "min_text_contrast_ratio": 2.5
+        },
+        "constraints": [
+          {
+            "text": "",
+            "hardness": "invalid-hardness"
+          }
+        ],
+        "representations": [
+          {
+            "id": "bad-rep",
+            "route": "nonexistent_route",
+            "role": "secondary"
+          }
+        ],
+        "review_handoff": {
+          "reviewer": "wrong-auditor"
+        }
+      },
+      "deliverables": [
+        {
+          "touch_target_px": 20,
+          "contrast_ratio": 2.5,
+          "wcag_violations": ["violation1"]
+        }
+      ]
+    }
+  ]
+}

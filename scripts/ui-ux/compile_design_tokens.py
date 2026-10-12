@@ -22,7 +22,7 @@ _HERE = Path(__file__).resolve().parent
 if str(_HERE) not in sys.path:
     sys.path.insert(0, str(_HERE))
 
-from _synth import json_dump, repo_root, token_path  # noqa: E402
+from _synth import json_dump, repo_root, token_path
 
 TOKEN_NAME = re.compile(r"^[A-Za-z0-9-]+$")
 ALIAS_RE = re.compile(r"^\{([A-Za-z0-9.-]+)\}$")
