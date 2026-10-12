@@ -23,6 +23,7 @@ Human index (not agent SoT):
 | --- | --- | --- |
 | [`design-system-architect/`](./design-system-architect/) | DTCG design tokens, CSS variables, modular typography scales, multi-theme token switching, component variant matrices | high |
 | [`a11y-compliance-operator/`](./a11y-compliance-operator/) | Automated WCAG 2.2 AA accessibility audits, screen reader semantics (ARIA/landmarks/accname), keyboard focus navigation & traps | standard |
+| [`accessibility-conformance-auditor/`](./accessibility-conformance-auditor/) | Strictly read-only independent auditor for WCAG 2.2 AA, DTCG token syntax, and visual regression conformance audits | high |
 | [`interaction-designer/`](./interaction-designer/) | Micro-interaction choreography, navigation flow specs, information architecture maps, touch targets, responsive reflow | standard |
 | [`visual-qa-operator/`](./visual-qa-operator/) | Headless multi-breakpoint screenshot sweeps, pixel diffs against golden baselines, component variant visual verification | standard |
 
