@@ -16,10 +16,10 @@ for _p in (_LIB, _ROUTING):
     if str(_p) not in sys.path:
         sys.path.insert(0, str(_p))
 
-from areas import AreasYamlError
-from generate_routing_index import render_agent_dispatch, render_area_map
-from generate_script_index import render_script_index
-from md import load_skill_record, skill_paths
+from md import load_skill_record, skill_paths  # noqa: E402
+from areas import AreasYamlError  # noqa: E402
+from generate_routing_index import render_agent_dispatch, render_area_map  # noqa: E402
+from generate_script_index import render_script_index  # noqa: E402
 
 HARNESS_TEMPLATE_MODE = "harness_template"
 WIKI_TEMPLATE_MODE = HARNESS_TEMPLATE_MODE  # Backward compatibility alias

@@ -185,7 +185,7 @@ def layout_boxes(boxes: list[Box], viewport: int) -> list[Box]:
     row_h = 0
     gap = 8
     for src in boxes:
-        box = Box(**src.__dict__)
+        box = Box(**{**src.__dict__})
         if viewport <= 375:
             box.x = 8
             box.y = y

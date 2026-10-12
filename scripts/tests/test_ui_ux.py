@@ -20,11 +20,10 @@ for path in (_SCRIPTS, _UI):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
-from _synth import repo_root
-from audit_accessibility import audit_html
-from audit_accessibility import run as run_a11y
-from compile_design_tokens import compile_tokens
-from run_visual_regression import run as run_visual
+from audit_accessibility import audit_html, run as run_a11y  # noqa: E402
+from compile_design_tokens import compile_tokens  # noqa: E402
+from run_visual_regression import run as run_visual  # noqa: E402
+from _synth import repo_root  # noqa: E402
 
 
 class TestVisualRegression(unittest.TestCase):

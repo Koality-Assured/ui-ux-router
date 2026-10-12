@@ -16,8 +16,8 @@ from pathlib import Path
 
 _LIB = Path(__file__).resolve().parents[1] / "_lib"
 sys.path.insert(0, str(_LIB))
-from areas import AreasYamlError, load_area_ids
-from paths import REPO_ROOT as ROOT
+from areas import AreasYamlError, load_area_ids  # noqa: E402
+from paths import REPO_ROOT as ROOT  # noqa: E402
 
 
 def resolve_primary_root() -> Path:
@@ -70,9 +70,9 @@ def worktree_path(slug: str) -> Path:
     return WORKTREES / slug
 
 
+from contextlib import contextmanager
 import os
 import time
-from contextlib import contextmanager
 
 
 @contextmanager
@@ -207,7 +207,7 @@ def cmd_add(
             "path": str(dest),
             "areas": areas,
             "agent": agent,
-            "created": dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "created": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         }
         if as_json:
             print(json.dumps({"dry_run": True, "claim": claim}, indent=2))
@@ -237,7 +237,7 @@ def cmd_add(
                 "path": str(dest),
                 "areas": areas,
                 "agent": agent,
-                "created": dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "created": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             }
             WORKTREES.mkdir(parents=True, exist_ok=True)
             try:

@@ -9,15 +9,15 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+from pathlib import Path
 import sys
+from typing import Any
 import urllib.request
 import xml.etree.ElementTree as ET
-from pathlib import Path
-from typing import Any
 
 _LIB = Path(__file__).resolve().parents[1] / "_lib"
 sys.path.insert(0, str(_LIB))
-from paths import REPO_ROOT as ROOT
+from paths import REPO_ROOT as ROOT  # noqa: E402
 
 CATALOG_PATH = ROOT / "ai-tooling" / "skills" / "meta" / "ai-vendor-updates" / "references" / "vendor-sources.json"
 
@@ -236,7 +236,7 @@ def main(argv: list[str] | None = None) -> int:
                     else:
                         feed_errors.append(f"Failed to fetch {ch['name']} at {feed_url}")
 
-    today_str = dt.datetime.now(dt.UTC).strftime("%Y-%m-%d")
+    today_str = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     briefing_md = generate_flash_briefing(catalog, selected_vendors, live_entries, today_str)
 
     out_file = None

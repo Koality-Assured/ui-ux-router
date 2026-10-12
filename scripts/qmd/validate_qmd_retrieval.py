@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import shutil
 import statistics
@@ -15,13 +16,13 @@ import subprocess
 import sys
 import time
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 _LIB = Path(__file__).resolve().parents[1] / "_lib"
 sys.path.insert(0, str(_LIB))
-from paths import REPO_ROOT as ROOT
-from setup_qmd_collections import resolve_collections
+from paths import REPO_ROOT as ROOT  # noqa: E402
+from setup_qmd_collections import resolve_collections  # noqa: E402
 
 EXPECTED_COLLECTIONS = [c[0] for c in resolve_collections(ROOT)]
 EXCLUDED_DIRS = ("change-history", "scratch")
@@ -294,7 +295,8 @@ def parse_json_stdout(stdout: str) -> object:
 
 def virt_to_rel(file_uri: str) -> str:
     path = file_uri.strip()
-    path = path.removeprefix("qmd://")
+    if path.startswith("qmd://"):
+        path = path[len("qmd://") :]
     return path.replace("\\", "/")
 
 
@@ -908,7 +910,7 @@ def main(argv: list[str] | None = None) -> int:
     }
 
     payload = {
-        "generated_at_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "qmd": qmd if isinstance(qmd, str) else " ".join(qmd),
         "index": "C:/home/developer/.cache/qmd/index.sqlite",
         "min_score": args.min_score,

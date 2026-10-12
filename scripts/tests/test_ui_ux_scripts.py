@@ -25,42 +25,40 @@ for path in (_SCRIPTS, _UI):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
-from _synth import repo_root
-from audit_accessibility import (
+from compile_design_tokens import (  # noqa: E402
+    compile_tokens,
+    css_name,
+    main as tokens_main,
+    render_css,
+    render_scss,
+    render_tailwind,
+    render_typescript,
+    resolve,
+)
+from audit_accessibility import (  # noqa: E402
     apca_contrast,
     audit_html,
     compute_contrast_matrix,
     evaluate_apca,
     evaluate_color_blindness,
     evaluate_wcag_contrast,
+    main as a11y_main,
     simulate_cvd,
     srgb_to_y,
     verify_touch_target_size,
 )
-from audit_accessibility import (
-    main as a11y_main,
-)
-from compile_design_tokens import (
-    compile_tokens,
-    css_name,
-    resolve,
-)
-from compile_design_tokens import (
-    main as tokens_main,
-)
-from viewport_matrix_tester import (
+from viewport_matrix_tester import (  # noqa: E402
     STANDARD_VIEWPORTS,
     analyze_css_breakpoints,
     check_query_matches,
     extract_container_queries,
     extract_media_queries,
+    main as viewport_main,
     parse_viewport_list,
     run_viewport_matrix_audit,
     test_component_layout,
 )
-from viewport_matrix_tester import (
-    main as viewport_main,
-)
+from _synth import repo_root  # noqa: E402
 
 
 class TestCompileDesignTokens(unittest.TestCase):

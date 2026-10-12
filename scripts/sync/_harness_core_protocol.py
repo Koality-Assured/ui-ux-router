@@ -9,8 +9,8 @@ from __future__ import annotations
 import json
 import re
 import subprocess
-from collections.abc import Callable, Iterable
 from pathlib import Path
+from typing import Callable, Iterable
 
 from _harness_template import (
     HARNESS_TEMPLATE_DEST_EXCLUDE_RELS,

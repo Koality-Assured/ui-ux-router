@@ -13,6 +13,7 @@ Algorithm (APCA) scores, and simulates Color Vision Deficiency (CVD) matrices
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 import subprocess
 import sys
@@ -23,7 +24,7 @@ _HERE = Path(__file__).resolve().parent
 if str(_HERE) not in sys.path:
     sys.path.insert(0, str(_HERE))
 
-from _synth import (
+from _synth import (  # noqa: E402
     contrast_ratio,
     json_dump,
     list_component_html,

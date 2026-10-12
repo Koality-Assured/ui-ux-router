@@ -19,7 +19,7 @@ _ROUTING = Path(__file__).resolve().parents[1] / "routing"
 sys.path.insert(0, str(_LIB))
 sys.path.insert(0, str(_ROUTING))
 
-from hybrid_dispatch import (
+from hybrid_dispatch import (  # noqa: E402
     BM25Candidate,
     HybridDispatcher,
     Tier1FastPath,
@@ -28,8 +28,8 @@ from hybrid_dispatch import (
     dispatch_query,
     tokenize,
 )
-from md import load_skill_record, parse_frontmatter
-from paths import REPO_ROOT as ROOT
+from md import load_skill_record, parse_frontmatter  # noqa: E402
+from paths import REPO_ROOT as ROOT  # noqa: E402
 
 
 def _skill_md(name: str) -> Path:
